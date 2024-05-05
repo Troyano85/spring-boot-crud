@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de productos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Control de Productos</a>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/products}">Control de Productos </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <h1>Lista de Productos</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/products/new}" class="btn btn-primary btn-sm mb3">Agregar Producto</a>
+        </div>
+    </div>
+    <br>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th class="text-center" scope="col">ID</th>
+            <th class="text-center" scope="col">Nombre</th>
+            <th class="text-center" scope="col">Precio</th>
+            <th class="text-center" scope="col">Descripción</th>
+            <th class="text-center" scope="col">Categoria</th>
+            <th class="text-center" scope="col">Existencia</th>
+            <th class="text-center" scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">ID</td>
+            <td th:text="${product.name}">Nombre</td>
+            <td th:text="${product.price}">Precio</td>
+            <td th:text="${product.description}">Descripcion</td>
+            <td th:text="${product.category}">Categoria</td>
+            <td th:text="${product.stock}">Existencia</td>
+            <td>
+                <a th:href="@{/products/edit/{id}(id=${product.id})}" class="btn btn-info">Editar</a>
+                <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-danger">Eliminar</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
